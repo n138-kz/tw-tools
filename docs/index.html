@@ -59,7 +59,7 @@ Released under the MIT license
 			console.log(target.value.trim());
 			target.value = target.value.split('https://').join('\nhttps://');
 			target.value = target.value.split('http://').join('\nhttp://');
-			target.value = target.value.split('ftp://').join('\ftp://');
+			target.value = target.value.split('ftp://').join('\nftp://');
 			target.value = target.value.split('\n').sort().join('\n');
 			target.value = arrayUniq(target.value.split('\n')).join('\n');
 			target.value = forceNameReplace(target.value.split('\n')).join('\n');
