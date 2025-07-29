@@ -70,6 +70,7 @@ Released under the MIT license
 			target = target.parentNode.children.item(1);
 			items = target.value.split('\n');
 			items = items.map((elem) => `${prefix}${elem}${postfix}`);
+			items.push('rename -v \'s/\\?.*//g\' *');
 			target.value = items.join('\n');
 		}
 	</script>
