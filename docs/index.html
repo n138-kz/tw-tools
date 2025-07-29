@@ -49,6 +49,9 @@ Released under the MIT license
 		}
 	</style>
 	<script>
+		function forceNameReplace(array) {
+			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
+		}
 		function arrayUniq(array) {
 			return array.filter((elem, index, self) => self.indexOf(elem) === index);
 		}
@@ -59,6 +62,7 @@ Released under the MIT license
 			target.value = target.value.split('ftp://').join('\ftp://');
 			target.value = target.value.split('\n').sort().join('\n');
 			target.value = arrayUniq(target.value.split('\n')).join('\n');
+			target.value = forceNameReplace(target.value.split('\n')).join('\n');
 			target.value = target.value.trim();
 		}
 	</script>
