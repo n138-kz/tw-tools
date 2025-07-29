@@ -56,7 +56,6 @@ Released under the MIT license
 			return array.filter((elem, index, self) => self.indexOf(elem) === index);
 		}
 		function splitLine(target) {
-			console.log(target.value.trim());
 			target.value = target.value.split('https://').join('\nhttps://');
 			target.value = target.value.split('http://').join('\nhttp://');
 			target.value = target.value.split('ftp://').join('\nftp://');
