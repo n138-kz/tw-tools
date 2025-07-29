@@ -48,5 +48,19 @@ Released under the MIT license
 			width: -webkit-fill-available; /* Safari */
 		}
 	</style>
+	<script>
+		function arrayUniq(array) {
+			return array.filter((elem, index, self) => self.indexOf(elem) === index);
+		}
+		function splitLine(target) {
+			console.log(target.value.trim());
+			target.value = target.value.split('https://').join('\nhttps://');
+			target.value = target.value.split('http://').join('\nhttp://');
+			target.value = target.value.split('ftp://').join('\ftp://');
+			target.value = target.value.split('\n').sort().join('\n');
+			target.value = arrayUniq(target.value.split('\n')).join('\n');
+			target.value = target.value.trim();
+		}
+	</script>
 </head>
 </html>
