@@ -66,7 +66,7 @@ Released under the MIT license
 		}
 		function addPrefix(target) {
 			prefix = 'wget \'';
-			postfix = '\'';
+			postfix = '\'&';
 			target = target.parentNode.children.item(1);
 			items = target.value.split('\n');
 			items = items.map((elem) => `${prefix}${elem}${postfix}`);
