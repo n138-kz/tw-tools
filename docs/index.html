@@ -71,7 +71,7 @@ Released under the MIT license
 			items = target.value.split('\n');
 			items = items.map((elem) => `${prefix}${elem}${postfix}`);
 			items.push('rename -v \'s/\\?.*//g\' *');
-			items = items.join('\n');
+			items = items.join('\n') + '\n';
 			console.log(items);
 			
 
