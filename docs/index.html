@@ -114,6 +114,17 @@ Released under the MIT license
 				console.warn('Unknown `section`', section);
 			}
 		}
+		function copy_list(target, section='') {
+			target = target.parentNode.children.item(1);
+			if(section == false) {
+			} else if(section == '') {
+				return null;
+			} else if(section == 'pbs.twimg.com') {
+			} else if(section == 'video.twimg.com') {
+			} else {
+				console.warn('Unknown `section`', section);
+			}
+		}
 	</script>
 </head>
 <body>
@@ -126,6 +137,7 @@ Released under the MIT license
 				<legend><a href="//pbs.twimg.com">pbs.twimg.com</a></legend>
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com')" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com')">
+				<input type="button" value="Copy to Clipboard" onclick="copy_list(this, 'pbs.twimg.com')">
 			</fieldset>
 		</div>
 	</section>
@@ -135,6 +147,7 @@ Released under the MIT license
 				<legend><a href="//video.twimg.com">video.twimg.com</a></legend>
 				<textarea id="" onblur="splitLine(this, 'video.twimg.com')" placeholder="https://video.twimg.com/amplify_video/1922007052844421120/pl/vbJwxUcQ1DALe4pQ.m3u8?variant_version=1&tag=21&v=cfc"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'video.twimg.com')">
+				<input type="button" value="Copy to Clipboard" onclick="copy_list(this, 'video.twimg.com')">
 			</fieldset>
 		</div>
 	</section>
