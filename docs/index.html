@@ -124,32 +124,6 @@ Released under the MIT license
 				console.warn('Unknown `section`', section);
 			}
 		}
-		function copy_list(target, section='') {
-			target = target.parentNode.children.item(1);
-			if(section == false) {
-			} else if(section == '') {
-				return null;
-			} else if(section == 'pbs.twimg.com') {
-				if (target.value.trim().length) {
-					items = target.value.split('\n');
-					items = items.map((elem) => `wget \'${elem}\'&`);
-					items.push('rename -v \'s/\\?.*//g\' *');
-					items = items.join('\n') + '\n';
-					console.log(items);
-					navigator.clipboard.writeText(items);
-				}
-			} else if(section == 'video.twimg.com') {
-				if (target.value.trim().length) {
-					items = target.value.split('\n');
-					items = items.map((elem) => `ffmpeg -hide_banner -i \'${elem}\' -y -- ${elem.replace(/\?.*/, '').replace(/.*\//, '').replace('.m3u8', '')}.mp4;`);
-					items = items.join('\n') + '\n';
-					console.log(items);
-					navigator.clipboard.writeText(items);
-				}
-			} else {
-				console.warn('Unknown `section`', section);
-			}
-		}
 	</script>
 </head>
 <body>
