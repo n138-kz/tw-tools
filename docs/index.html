@@ -72,6 +72,14 @@ Released under the MIT license
 			items = items.map((elem) => `${prefix}${elem}${postfix}`);
 			items.push('rename -v \'s/\\?.*//g\' *');
 			items = items.join('\n');
+
+			blob = new Blob(items, {type: 'text/plain'});
+			a = document.createElement('a');
+			a.href = URL.createObjectURL(blob);
+			a.target = '_blank';
+			a.download = '#.txt';
+			a.click();
+
 		}
 	</script>
 </head>
