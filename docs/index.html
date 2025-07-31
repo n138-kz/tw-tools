@@ -64,8 +64,11 @@ Released under the MIT license
 			target.value = forceNameReplace(target.value.split('\n')).join('\n');
 			target.value = target.value.trim();
 		}
-		function download_list(target) {
+		function download_list(target, section='') {
 			target = target.parentNode.children.item(1);
+			if(section == false) {
+			} else if(section == '') {
+			}
 			e = [
 				'wget \'',
 				'\'&',
