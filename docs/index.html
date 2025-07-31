@@ -76,7 +76,7 @@ Released under the MIT license
 			target.value = target.value.trim();
 			resizeTarget(target);
 		}
-		function download_list(target, section='', download=true) {
+		function download_list(target, section='', download=true, copy2mem=false) {
 			target = target.parentNode.children.item(1);
 			if(section == false) {
 			} else if(section == '') {
@@ -97,6 +97,9 @@ Released under the MIT license
 						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
 						a.click();
 					}
+					if (copy2mem) {
+						navigator.clipboard.writeText(items);
+					}
 				}
 			} else if(section == 'video.twimg.com') {
 				if (target.value.trim().length) {
@@ -112,6 +115,9 @@ Released under the MIT license
 						a.target = '_blank';
 						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
 						a.click();
+					}
+					if (copy2mem) {
+						navigator.clipboard.writeText(items);
 					}
 				}
 			} else {
