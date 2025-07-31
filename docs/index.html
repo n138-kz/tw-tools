@@ -55,13 +55,18 @@ Released under the MIT license
 		function arrayUniq(array) {
 			return array.filter((elem, index, self) => self.indexOf(elem) === index);
 		}
-		function splitLine(target) {
+		function splitLine(target, section='') {
 			target.value = target.value.split('https://').join('\nhttps://');
 			target.value = target.value.split('http://').join('\nhttp://');
 			target.value = target.value.split('ftp://').join('\nftp://');
 			target.value = target.value.split('\n').sort().join('\n');
 			target.value = arrayUniq(target.value.split('\n')).join('\n');
-			target.value = forceNameReplace(target.value.split('\n')).join('\n');
+			if(section == false) {
+			} else if(section == '') {
+				return null;
+			} else if(section == 'pbs.twimg.com') {
+				target.value = forceNameReplace(target.value.split('\n')).join('\n');
+			}
 			target.value = target.value.trim();
 		}
 		function download_list(target, section='') {
@@ -98,7 +103,7 @@ Released under the MIT license
 		<div>
 			<fieldset>
 				<legend><a href="//pbs.twimg.com">pbs.twimg.com</a></legend>
-				<textarea id="" onblur="splitLine(this)" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
+				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com')" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com')">
 			</fieldset>
 		</div>
