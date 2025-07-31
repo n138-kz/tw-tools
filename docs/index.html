@@ -55,6 +55,9 @@ Released under the MIT license
 		function arrayUniq(array) {
 			return array.filter((elem, index, self) => self.indexOf(elem) === index);
 		}
+		function resizeTarget(target) {
+			target.style.height=`${target.value.trim().split('\n').length+5}em`;
+		}
 		function splitLine(target, section='') {
 			target.value = target.value.split('https://').join('\nhttps://');
 			target.value = target.value.split('http://').join('\nhttp://');
@@ -71,6 +74,7 @@ Released under the MIT license
 				console.warn('Unknown `section`', section);
 			}
 			target.value = target.value.trim();
+			resizeTarget(target);
 		}
 		function download_list(target, section='') {
 			target = target.parentNode.children.item(1);
