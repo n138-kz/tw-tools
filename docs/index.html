@@ -68,24 +68,24 @@ Released under the MIT license
 			target = target.parentNode.children.item(1);
 			if(section == false) {
 			} else if(section == '') {
+			} else if(section == 'pbs.twimg.com') {
+				e = [
+					'wget \'',
+					'\'&',
+				];
+				items = target.value.split('\n');
+				items = items.map((elem) => `${e[0]}${elem}${e[1]}`);
+				items.push('rename -v \'s/\\?.*//g\' *');
+				items = items.join('\n') + '\n';
+				console.log(items);
+				
+				blob = new Blob([items], {type: 'text/plain'});
+				a = document.createElement('a');
+				a.href = URL.createObjectURL(blob);
+				a.target = '_blank';
+				a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+				a.click();
 			}
-			e = [
-				'wget \'',
-				'\'&',
-			];
-			items = target.value.split('\n');
-			items = items.map((elem) => `${e[0]}${elem}${e[1]}`);
-			items.push('rename -v \'s/\\?.*//g\' *');
-			items = items.join('\n') + '\n';
-			console.log(items);
-			
-			blob = new Blob([items], {type: 'text/plain'});
-			a = document.createElement('a');
-			a.href = URL.createObjectURL(blob);
-			a.target = '_blank';
-			a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
-			a.click();
-
 		}
 	</script>
 </head>
@@ -98,7 +98,7 @@ Released under the MIT license
 			<fieldset>
 				<legend><a href="//pbs.twimg.com">pbs.twimg.com</a></legend>
 				<textarea id="" onblur="splitLine(this)" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
-				<input type="button" value="Download list.txt" onclick="download_list(this)">
+				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com')">
 			</fieldset>
 		</div>
 	</section>
