@@ -95,9 +95,7 @@ Released under the MIT license
 			} else if(section == 'video.twimg.com') {
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
-					items = items.map((elem) => {
-						return `ffmpeg -i \'${elem}\' ${elem}.mp4`;
-					});
+					items = items.map((elem) => `ffmpeg -i \'${elem}\' -y -- ${elem.replace(/\?.*/, '').replace(/.*\//, '').replace('.m3u8', '')}.mp4;`);
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
