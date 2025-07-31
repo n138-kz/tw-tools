@@ -72,6 +72,8 @@ Released under the MIT license
 			items = items.map((elem) => `${prefix}${elem}${postfix}`);
 			items.push('rename -v \'s/\\?.*//g\' *');
 			items = items.join('\n');
+			console.log(items);
+			
 
 			blob = new Blob(items, {type: 'text/plain'});
 			a = document.createElement('a');
