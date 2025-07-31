@@ -75,7 +75,7 @@ Released under the MIT license
 			console.log(items);
 			
 
-			blob = new Blob(items, {type: 'text/plain'});
+			blob = new Blob([items], {type: 'text/plain'});
 			a = document.createElement('a');
 			a.href = URL.createObjectURL(blob);
 			a.target = '_blank';
