@@ -66,6 +66,7 @@ Released under the MIT license
 				return null;
 			} else if(section == 'pbs.twimg.com') {
 				target.value = forceNameReplace(target.value.split('\n')).join('\n');
+			} else if(section == 'video.twimg.com') {
 			} else {
 				console.warn('Unknown `section`', section);
 			}
