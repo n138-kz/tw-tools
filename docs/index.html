@@ -1,0 +1,159 @@
+<!--
+LICENSE)
+Copyright n138-kz and other contributors
+Released under the MIT license
+--><!DOCTYPE html><html lang="ja">
+<head>
+	<meta charset="utf-8" />
+	<title>tw-tools</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<link rel="preconnect dns-prefetch" href="//github.com">
+	<link rel="preconnect dns-prefetch" href="//n138-kz.github.io">
+	<link rel="preconnect dns-prefetch" href="//code.jquery.com">
+	<link rel="preconnect dns-prefetch" href="//accounts.google.com">
+	<link rel="preconnect dns-prefetch" href="//www.google.com">
+	<link rel="stylesheet" type="text/css" href="https://n138-kz.github.io/lib/master.css?t=0" />
+	<script src="https://n138-kz.github.io/lib/master.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA"></script>
+	<script src="https://n138-kz.github.io/lib/grecaptcha.js"></script>
+	<style>
+		:root {
+			height:100vh;
+			box-sizing: border-box;
+		}
+		code {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		h1,h2,ul,ol,li {
+			margin: 0;
+			padding: 0;
+			margin-block-start: 0em;
+			margin-block-end: 0em;
+		}
+		ul,ol {
+			margin-left:20px;
+			padding-left:20px;
+		}
+		textarea {
+			min-height: 5em;
+			width: stretch;
+			width: -moz-available; /* Firefox */
+			width: -webkit-fill-available; /* Safari */
+		}
+	</style>
+	<script>
+		function forceNameReplace(array) {
+			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
+		}
+		function arrayUniq(array) {
+			return array.filter((elem, index, self) => self.indexOf(elem) === index);
+		}
+		function resizeTarget(target) {
+			target.style.height=`${target.value.trim().split('\n').length+5}em`;
+		}
+		function splitLine(target, section='') {
+			target.value = target.value.split('https://').join('\nhttps://');
+			target.value = target.value.split('http://').join('\nhttp://');
+			target.value = target.value.split('ftp://').join('\nftp://');
+			target.value = target.value.split('\n').sort().join('\n');
+			target.value = arrayUniq(target.value.split('\n')).join('\n');
+			if(section == false) {
+			} else if(section == '') {
+				return null;
+			} else if(section == 'pbs.twimg.com') {
+				target.value = forceNameReplace(target.value.split('\n')).join('\n');
+			} else if(section == 'video.twimg.com') {
+			} else {
+				console.warn('Unknown `section`', section);
+			}
+			target.value = target.value.trim();
+			resizeTarget(target);
+		}
+		function download_list(target, section='', download=true, copy2mem=false) {
+			target = target.parentNode.children.item(1);
+			if(section == false) {
+			} else if(section == '') {
+				return null;
+			} else if(section == 'pbs.twimg.com') {
+				if (target.value.trim().length) {
+					items = target.value.split('\n');
+					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
+					items = items.join('\n') + '\n';
+					console.log(items);
+					
+					if (download) {
+						blob = new Blob([items], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+					}
+					if (copy2mem) {
+						navigator.clipboard.writeText(items);
+					}
+				}
+			} else if(section == 'video.twimg.com') {
+				if (target.value.trim().length) {
+					items = target.value.split('\n');
+					items = items.map((elem) => `ffmpeg -hide_banner -i \'${elem}\' -y -- ${elem.replace(/\?.*/, '').replace(/.*\//, '').replace('.m3u8', '')}.mp4;`);
+					items = items.join('\n') + '\n';
+					console.log(items);
+					
+					if (download) {
+						blob = new Blob([items], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+					}
+					if (copy2mem) {
+						navigator.clipboard.writeText(items);
+					}
+				}
+			} else {
+				console.warn('Unknown `section`', section);
+			}
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<div></div>
+	</header>
+	<section>
+		<div>
+			<fieldset>
+				<legend><a href="//pbs.twimg.com">pbs.twimg.com</a></legend>
+				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com')" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
+				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
+				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
+			</fieldset>
+		</div>
+	</section>
+	<section>
+		<div>
+			<fieldset>
+				<legend><a href="//video.twimg.com">video.twimg.com</a></legend>
+				<textarea id="" onblur="splitLine(this, 'video.twimg.com')" placeholder="https://video.twimg.com/amplify_video/1922007052844421120/pl/vbJwxUcQ1DALe4pQ.m3u8?variant_version=1&tag=21&v=cfc"></textarea>
+				<input type="button" value="Download list.txt" onclick="download_list(this, 'video.twimg.com', true, false)">
+				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'video.twimg.com', false, true)">
+			</fieldset>
+		</div>
+	</section>
+	<section>
+		<div>
+			<!-- OGP -->
+			<a href="https://github.com/n138-kz/tw-tools"><img style="width: stretch;max-width: 300px;" src="https://images-ext-1.discordapp.net/external/9qp481SxbpEOn7WY1QyBhKh8TN7r1f7SLX8peC5REx8/https/opengraph.githubassets.com/7558057423360a34bf952f4601b836edd3be27bc44d379b60b4cc125a48ee563/n138-kz/tw-tools?format=webp" alt=""></a>
+		</div>
+	</section>
+</body>
+</html>
