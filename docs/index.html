@@ -65,11 +65,11 @@ Released under the MIT license
 			target.value = target.value.trim();
 		}
 		function download_list(target) {
-			prefix = 'wget \'';
-			postfix = '\'&';
 			target = target.parentNode.children.item(1);
+			e1 = 'wget \'';
+			e2 = '\'&';
 			items = target.value.split('\n');
-			items = items.map((elem) => `${prefix}${elem}${postfix}`);
+			items = items.map((elem) => `${e1}${elem}${e2}`);
 			items.push('rename -v \'s/\\?.*//g\' *');
 			items = items.join('\n') + '\n';
 			console.log(items);
