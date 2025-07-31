@@ -64,7 +64,7 @@ Released under the MIT license
 			target.value = forceNameReplace(target.value.split('\n')).join('\n');
 			target.value = target.value.trim();
 		}
-		function addPrefix(target) {
+		function download_list(target) {
 			prefix = 'wget \'';
 			postfix = '\'&';
 			target = target.parentNode.children.item(1);
@@ -84,14 +84,14 @@ Released under the MIT license
 			<fieldset>
 				<legend></legend>
 				<textarea id="" onblur="splitLine(this)"></textarea>
-				<input type="button" value="Download list.txt" onclick="addPrefix(this)">
+				<input type="button" value="Download list.txt" onclick="download_list(this)">
 			</fieldset>
 		</div>
 		<div>
 			<fieldset>
 				<legend></legend>
 				<textarea id="" onblur="splitLine(this)"></textarea>
-				<input type="button" value="Download list.txt" onclick="addPrefix(this)">
+				<input type="button" value="Download list.txt" onclick="download_list(this)">
 			</fieldset>
 		</div>
 	</section>
