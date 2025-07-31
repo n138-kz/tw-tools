@@ -77,7 +77,7 @@ Released under the MIT license
 			a = document.createElement('a');
 			a.href = URL.createObjectURL(blob);
 			a.target = '_blank';
-			a.download = '#.txt';
+			a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
 			a.click();
 
 		}
