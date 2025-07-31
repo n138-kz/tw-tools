@@ -66,10 +66,12 @@ Released under the MIT license
 		}
 		function download_list(target) {
 			target = target.parentNode.children.item(1);
-			e1 = 'wget \'';
-			e2 = '\'&';
+			e = [
+				'wget \'',
+				'\'&',
+			];
 			items = target.value.split('\n');
-			items = items.map((elem) => `${e1}${elem}${e2}`);
+			items = items.map((elem) => `${e[0]}${elem}${e[1]}`);
 			items.push('rename -v \'s/\\?.*//g\' *');
 			items = items.join('\n') + '\n';
 			console.log(items);
