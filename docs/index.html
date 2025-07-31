@@ -76,7 +76,7 @@ Released under the MIT license
 			target.value = target.value.trim();
 			resizeTarget(target);
 		}
-		function download_list(target, section='') {
+		function download_list(target, section='', download=true) {
 			target = target.parentNode.children.item(1);
 			if(section == false) {
 			} else if(section == '') {
@@ -89,12 +89,14 @@ Released under the MIT license
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
-					blob = new Blob([items], {type: 'text/plain'});
-					a = document.createElement('a');
-					a.href = URL.createObjectURL(blob);
-					a.target = '_blank';
-					a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
-					a.click();
+					if (download) {
+						blob = new Blob([items], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+					}
 				}
 			} else if(section == 'video.twimg.com') {
 				if (target.value.trim().length) {
@@ -103,12 +105,14 @@ Released under the MIT license
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
-					blob = new Blob([items], {type: 'text/plain'});
-					a = document.createElement('a');
-					a.href = URL.createObjectURL(blob);
-					a.target = '_blank';
-					a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
-					a.click();
+					if (download) {
+						blob = new Blob([items], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+					}
 				}
 			} else {
 				console.warn('Unknown `section`', section);
