@@ -84,7 +84,7 @@ Released under the MIT license
 			} else if(section == 'pbs.twimg.com') {
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
-					items = items.map((elem) => `wget \'${elem}\'&`);
+					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
