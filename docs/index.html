@@ -66,6 +66,8 @@ Released under the MIT license
 				return null;
 			} else if(section == 'pbs.twimg.com') {
 				target.value = forceNameReplace(target.value.split('\n')).join('\n');
+			} else {
+				console.warn('Unknown `section`', section);
 			}
 			target.value = target.value.trim();
 		}
@@ -91,6 +93,8 @@ Released under the MIT license
 				a.target = '_blank';
 				a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
 				a.click();
+			} else {
+				console.warn('Unknown `section`', section);
 			}
 		}
 	</script>
