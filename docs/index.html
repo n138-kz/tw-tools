@@ -85,7 +85,6 @@ Released under the MIT license
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
 					items = items.map((elem) => `wget \'${elem}\'&`);
-					items.push('rename -v \'s/\\?.*//g\' *');
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
