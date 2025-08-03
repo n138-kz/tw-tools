@@ -18,7 +18,8 @@
 
 ## Refs
 
-- [![](https://www.google.com/s2/favicons?size=64&domain=https://github.com)tw-tools](https://github.com/n138-kz/tw-tools/)
+- [![](https://www.google.com/s2/favicons?size=64&domain=https://github.com)tw-tools](https://github.com/n138-kz/tw-tools)
+    [![](https://images-ext-1.discordapp.net/external/9qp481SxbpEOn7WY1QyBhKh8TN7r1f7SLX8peC5REx8/https/opengraph.githubassets.com/7558057423360a34bf952f4601b836edd3be27bc44d379b60b4cc125a48ee563/n138-kz/tw-tools?format=webp)](https://github.com/n138-kz/tw-tools)
 
 ## License
 
