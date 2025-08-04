@@ -1,7 +1,6 @@
 # [tw-tools](https://github.com/n138-kz/tw-tools)
 
 [![GitHub Extra Pins](https://github-readme-stats.vercel.app/api/pin/?locale=ja&show_owner=true&theme=graywhite&username=n138-kz&repo=tw-tools)](https://github.com/n138-kz/tw-tools)
-[![](https://images-ext-1.discordapp.net/external/9qp481SxbpEOn7WY1QyBhKh8TN7r1f7SLX8peC5REx8/https/opengraph.githubassets.com/7558057423360a34bf952f4601b836edd3be27bc44d379b60b4cc125a48ee563/n138-kz/tw-tools?format=webp)](https://github.com/n138-kz/tw-tools)
 
 ## Activity
 
