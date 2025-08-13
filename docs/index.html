@@ -146,13 +146,6 @@ Released under the MIT license
 				console.trace(error);
 				return '';
 			}
-			try {
-				navigator.clipboard.writeText('');
-			} catch (error) {
-				console.error(error);
-				console.trace(error);
-				return '';
-			}
 			return await text;
 		}
 	</script>
