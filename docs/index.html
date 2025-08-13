@@ -141,13 +141,16 @@ Released under the MIT license
 				await permissionStatus
 			);
 
+			let text;
 			try {
-				return await navigator.clipboard.readText();
+				text = await navigator.clipboard.readText();
 			} catch (error) {
 				console.error(error);
 				console.trace(error);
-				return '';
+				text = '';
 			}
+			console.log(text);
+			return text;
 		}
 	</script>
 </head>
