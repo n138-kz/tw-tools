@@ -138,15 +138,13 @@ Released under the MIT license
 			console.debug(`[clipboard-read] [${permissionStatus['clipboard-read']['state']}]`, await permissionStatus);
 			console.debug(`[clipboard-write] [${permissionStatus['clipboard-write']['state']}]`, await permissionStatus);
 
-			let text;
 			try {
-				text = await navigator.clipboard.readText();
+				return await navigator.clipboard.readText();
 			} catch (error) {
 				console.error(error);
 				console.trace(error);
 				return '';
 			}
-			return await text;
 		}
 	</script>
 </head>
