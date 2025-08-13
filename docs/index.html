@@ -62,8 +62,8 @@ Released under the MIT license
 			target.value = target.value.split('https://').join('\nhttps://');
 			target.value = target.value.split('http://').join('\nhttp://');
 			target.value = target.value.split('ftp://').join('\nftp://');
-			target.value = target.value.replace(/^[^(https?)].*/, '');
 			target.value = target.value.split('\n').sort().join('\n');
+			target.value = target.value.replace(/^[^(https?)].*/, '');
 			target.value = arrayUniq(target.value.split('\n')).join('\n');
 			if(section == false) {
 			} else if(section == '') {
