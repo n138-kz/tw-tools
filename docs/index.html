@@ -138,6 +138,7 @@ Released under the MIT license
 				return await navigator.clipboard.readText();
 			} catch (error) {
 				console.error(error);
+				console.trace(error);
 				return '';
 			}
 		}
