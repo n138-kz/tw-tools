@@ -143,6 +143,11 @@ Released under the MIT license
 
 			let text;
 			try {
+				console.log([
+					navigator.clipboard.readText(),
+					await navigator.clipboard.readText(),
+				]);
+				
 				text = await navigator.clipboard.readText();
 			} catch (error) {
 				console.error(error);
