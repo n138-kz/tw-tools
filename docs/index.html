@@ -103,6 +103,23 @@ Released under the MIT license
 								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
 							}
 						}
+						return {
+							dom: [
+								{
+									a: {
+										url: 'https://discord.com/channels/@me',
+										text: discord_userinfo.name,
+									},
+									img: {
+										url: discord_userinfo.avatar,
+										alt: 'discord avatar',
+										style: {
+											maxHeight: '1em',
+										},
+									},
+								},
+							],
+						}
 					}catch(e){
 						console.error(e);
 						blob = new Blob([e], {type: 'text/plain'});
@@ -187,6 +204,29 @@ Released under the MIT license
 							if (document.querySelectorAll('a[href^="https://discord.com/oauth2/authorize"]').length>0) {
 								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
 							}
+						}
+						return {
+							dom: [
+								{
+									a: {
+										url: 'https://discord.com/channels/@me',
+										text: discord_userinfo.name,
+									},
+									img: {
+										url: discord_userinfo.avatar,
+										alt: 'discord avatar',
+										style: {
+											maxHeight: '1em',
+										},
+									},
+								},
+								{
+									a: {
+										url: `https://api.n138.jp/sso_discord/server/token_revoke.php?token=${query_list.access_token}`,
+										text: '【ログアウト(β)】',
+									},
+								},
+							],
 						}
 					}catch(e){
 						console.error(e);
