@@ -279,6 +279,14 @@ Released under the MIT license
 					Array.from(document.querySelectorAll('[value=SignIn]')).map(e=>{
 						e.value='SignOut';
 						e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
+						dom = [];
+						dom[0] = document.createElement('a');
+						dom[0].href = authn_discord['dom'][0]['a']['url'];
+						dom[1] = document.createElement('img');
+						dom[1].src = authn_discord['dom'][0]['img']['url'];
+						dom[1].alt = authn_discord['dom'][0]['img']['text'];
+						dom[0].appendChild(dom[1]);
+						e.after(dom[0]);
 					});
 				}
 			} catch (e) {
