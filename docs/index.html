@@ -48,6 +48,12 @@ Released under the MIT license
 			width: -webkit-fill-available; /* Safari */
 		}
 	</style>
+	<style>
+		div.thumnails img {
+			max-width: 100px;
+			max-height: 100px;
+		}
+	</style>
 	<script>
 		function forceNameReplace(array) {
 			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
@@ -150,6 +156,24 @@ Released under the MIT license
 			console.log(text);
 			return text;
 		}
+		function view_thumnails(target) {
+			data = target.value;
+			console.log(data);
+			data = data.split('\n');
+			dom = [];
+			dom[0] = document.createElement('div');
+			dom[0].classList.add('thumnails');
+			for (let i = 0; i < data.length; i++) {
+				dom[1] = document.createElement('a');
+				dom[1].href = data[i];
+				dom[2] = document.createElement('img');
+				dom[2].src = data[i].replace(/(name=.*)/g, 'name=thumb');
+				dom[1].appendChild(dom[2]);
+				dom[0].appendChild(dom[1]);
+			}
+			Array.from(document.querySelectorAll('div.thumnails')).map((elem) => elem.remove());
+			target.parentNode.parentNode.after(dom[0]);
+		}
 	</script>
 </head>
 <body>
@@ -160,7 +184,7 @@ Released under the MIT license
 		<div>
 			<fieldset>
 				<legend><a href="//pbs.twimg.com">pbs.twimg.com</a></legend>
-				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com')" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
+				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
 			</fieldset>
