@@ -285,6 +285,7 @@ Released under the MIT license
 						dom[1] = document.createElement('img');
 						dom[1].src = authn_discord['dom'][0]['img']['url'];
 						dom[1].alt = authn_discord['dom'][0]['img']['text'];
+						dom[1].style.maxHeight = authn_discord['dom'][0]['img']['style']['maxHeight'];
 						dom[0].appendChild(dom[1]);
 						e.after(dom[0]);
 					});
