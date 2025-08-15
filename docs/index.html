@@ -279,7 +279,7 @@ Released under the MIT license
 					e.value='SignOut';
 					e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
 				});
-			} catch (error) {
+			} catch (e) {
 				console.error(e);
 				console.trace(e);
 				
