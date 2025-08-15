@@ -176,6 +176,8 @@ Released under the MIT license
 			Array.from(document.querySelectorAll('div.thumnails')).map((elem) => elem.remove());
 			target.parentNode.parentNode.after(dom[0]);
 		}
+		function authnSSO() {
+		}
 	</script>
 </head>
 <body>
@@ -189,6 +191,7 @@ Released under the MIT license
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
+				<input type="button" value="Sync ↑" onclick="authnSSO()" disabled>
 			</fieldset>
 		</div>
 	</section>
