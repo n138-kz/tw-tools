@@ -277,7 +277,7 @@ Released under the MIT license
 				sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord', JSON.stringify(authn_discord) );
 				Array.from(document.querySelectorAll('[value=SignIn]')).map(e=>{
 					e.value='SignOut';
-					e.setAttribute('onclick', `authnSSO(${authn_discord['dom'][1]['a']['url']})`);
+					e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
 				});
 			} catch (error) {
 				console.error(e);
