@@ -278,6 +278,7 @@ Released under the MIT license
 					sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord', JSON.stringify(authn_discord) );
 					Array.from(document.querySelectorAll('[value^=SignIn]')).map(e=>{
 						e.value='SignOut';
+						e.dataset.status='signined';
 						e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
 						dom = [];
 						dom[0] = document.createElement('a');
@@ -459,7 +460,7 @@ Released under the MIT license
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
-				<input type="button" value="SignIn" onclick="authnSSO()">
+				<input type="button" value="SignIn" onclick="authnSSO()" data-status="signouted">
 				<input type="button" value="Sync ↑" onclick="syncServer(this, 'pbs.twimg.com', 'upload')" disabled>
 				<input type="button" value="Sync ↓" onclick="syncServer(this, 'pbs.twimg.com', 'download')" disabled>
 			</fieldset>
