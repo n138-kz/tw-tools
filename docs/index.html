@@ -316,6 +316,11 @@ Released under the MIT license
 			target.parentNode.parentNode.after(dom[0]);
 		}
 		function authnSSO() {
+			window.open(
+				`https://discord.com/oauth2/authorize?client_id=1331215597119340585&response_type=code&redirect_uri=${location.origin}${location.pathname}&scope=identify+openid+guilds`,
+				'discord_oauth2',
+				'width=300,height=300'
+			);
 		}
 		function syncServer(target, section='', syncto='download') {
 		}
