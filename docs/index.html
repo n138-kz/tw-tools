@@ -507,13 +507,12 @@ Released under the MIT license
 				});
 
 				try {
-					req = await fetch(url, {
+					req = await fetch(`${url}?access_token=${data.access_token}&contents=${JSON.stringify(data.contents)}&section=${data.section}`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
 						},
 						cache: 'no-store',
-						body: JSON.stringify(data),
 					});
 					console.log({
 						req: await req,
