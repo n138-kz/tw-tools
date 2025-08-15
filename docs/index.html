@@ -110,7 +110,7 @@ Released under the MIT license
 						}
 					}catch(e){
 						console.error(e);
-						location.replace( location.origin + location.pathname );
+						setTimeout(e=>location.replace( location.origin + location.pathname ),3*10**3);
 					}
 				} else if ( query_list.access_token !== '' ) {
 					try {
