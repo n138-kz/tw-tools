@@ -482,6 +482,9 @@ Released under the MIT license
 					cache: 'no-store',
 					body: JSON.stringify(data),
 				});
+				console.log({
+					req: await req,
+				});
 				res = await req.json();
 				console.log({
 					req: await req,
@@ -504,6 +507,9 @@ Released under the MIT license
 					},
 					cache: 'no-store',
 					body: JSON.stringify(data),
+				});
+				console.log({
+					req: await req,
 				});
 				res = await req.json();
 				console.log({
