@@ -473,6 +473,14 @@ Released under the MIT license
 					url: url,
 					data: data,
 				});
+			} else if (syncto=='download') {
+				data.contents = null;
+
+				console.log({
+					target: target,
+					url: url,
+					data: data,
+				});
 			}
 
 			evented_on.disabled = false;
