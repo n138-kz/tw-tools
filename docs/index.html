@@ -449,7 +449,7 @@ Released under the MIT license
 				);
 			}
 		}
-		function syncServer(target, section='pbs.twimg.com', syncto='download') {
+		async function syncServer(target, section='pbs.twimg.com', syncto='download') {
 			target.disabled = true;
 			evented_on = target;
 			target = target.parentNode.children.item(1);
