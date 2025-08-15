@@ -75,6 +75,7 @@ $requests = array_merge([
 $requests = array_merge($requests, $_POST);
 $requests['issue_at_time'] = time();
 $requests['remote_address'] = $_SERVER['REMOTE_ADDR'];
+$requests['access_token'] = base64_decode($requests['access_token']);
 
 $discord_api = new discord([
     'access_token'=> $requests['access_token'],
