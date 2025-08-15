@@ -69,4 +69,18 @@ echo json_encode([
     'access_token' => $_POST['access_token'],
     'section' => $_POST['section'],
     'contents' => $_POST['contents'],
+$requests = [];
+$requests = array_merge([
+    'issue_at_time' => null,
+    'remote_address' => null,
+    'access_token' => null,
+    'section' => null,
+    'contents' => [],
+], $requests);
+$requests = array_merge($requests, $_POST);
+$requests['issue_at_time'] = time();
+$requests['remote_address'] = $_SERVER['REMOTE_ADDR'];
+
+$discord_api = new discord([
+    'access_token'=> $requests['access_token'],
 ]);
