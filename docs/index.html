@@ -415,6 +415,12 @@ Released under the MIT license
 		}
 		function authnSSO(logout_url) {
 			if (logout_url) {
+				subwin = window.open(
+					logout_url,
+					'subwin',
+					'width=560,height=600'
+				);
+				console.log(subwin);
 			} else {
 				location.replace(
 					`https://discord.com/oauth2/authorize?client_id=1331215597119340585&response_type=code&redirect_uri=${location.origin}${location.pathname}&scope=identify+openid+guilds`,
