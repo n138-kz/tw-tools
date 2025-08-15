@@ -281,6 +281,7 @@ Released under the MIT license
 				});
 			} catch (error) {
 				console.error(e);
+				console.trace(e);
 				
 				blob = new Blob([e], {type: 'text/plain'});
 				a = document.createElement('a');
