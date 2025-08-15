@@ -124,6 +124,7 @@ Released under the MIT license
 								discord_userinfo: discord_userinfo,
 							},
 							response_to_request: res,
+							iat: new Date().getTime()/10**3,
 						}
 					}catch(e){
 						console.error(e);
@@ -242,6 +243,7 @@ Released under the MIT license
 								discord_userinfo: discord_userinfo,
 							},
 							response_to_request: res,
+							iat: new Date().getTime()/10**3,
 						}
 					}catch(e){
 						console.error(e);
