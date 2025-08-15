@@ -156,6 +156,7 @@ Released under the MIT license
 			data = data.split('\n');
 			dom = [];
 			dom[0] = document.createElement('div');
+			dom[0].classList.add('thumnails');
 			for (let i = 0; i < data.length; i++) {
 				dom[1] = document.createElement('a');
 				dom[1].href = data[i];
@@ -166,6 +167,7 @@ Released under the MIT license
 				dom[1].appendChild(dom[2]);
 				dom[0].appendChild(dom[1]);
 			}
+			Array.from(document.querySelectorAll('div.thumnails')).map((elem) => elem.remove());
 			target.parentNode.parentNode.after(dom[0]);
 		}
 	</script>
