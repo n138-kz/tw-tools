@@ -276,7 +276,7 @@ Released under the MIT license
 					authn_discord = await authn_discord(query_list);
 					console.log(authn_discord);
 					sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord', JSON.stringify(authn_discord) );
-					Array.from(document.querySelectorAll('[value=SignIn]')).map(e=>{
+					Array.from(document.querySelectorAll('[value^=SignIn]')).map(e=>{
 						e.value='SignOut';
 						e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
 						dom = [];
