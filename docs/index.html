@@ -459,6 +459,7 @@ Released under the MIT license
 
 			data = {
 				access_token: btoa(authn_discord.object.discord.oauth2_token),
+				section: section,
 				contents: target.value.trim(),
 			}
 			data.contents = data.contents.length>0 ? data.contents.trim().split('\n') : [];
