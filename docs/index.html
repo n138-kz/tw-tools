@@ -407,10 +407,13 @@ Released under the MIT license
 			Array.from(document.querySelectorAll('div.thumnails')).map((elem) => elem.remove());
 			target.parentNode.parentNode.after(dom[0]);
 		}
-		function authnSSO() {
-			location.replace(
-				`https://discord.com/oauth2/authorize?client_id=1331215597119340585&response_type=code&redirect_uri=${location.origin}${location.pathname}&scope=identify+openid+guilds`,
-			);
+		function authnSSO(logout_url) {
+			if (logout_url) {
+			} else {
+				location.replace(
+					`https://discord.com/oauth2/authorize?client_id=1331215597119340585&response_type=code&redirect_uri=${location.origin}${location.pathname}&scope=identify+openid+guilds`,
+				);
+			}
 		}
 		function syncServer(target, section='', syncto='download') {
 		}
