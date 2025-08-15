@@ -269,9 +269,6 @@ Released under the MIT license
 			query_list.error_description = ( query_list.error_description === "" || query_list.error_description === null || query_list.error_description === undefined )?'':decodeURIComponent(query_list.error_description.replace(/\+/g,'%20'));
 			console.debug(query_list);
 
-			console.log(
-				await authn_discord(query_list)
-			);
 			try {
 				authn_discord = await authn_discord(query_list);
 				console.log(authn_discord);
