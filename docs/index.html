@@ -466,7 +466,11 @@ Released under the MIT license
 			}
 			data.contents = data.contents.length>0 ? data.contents.trim().split('\n') : [];
 
-			console.log(target, url, data);
+			console.log({
+				target: target,
+				url: url,
+				data: data,
+			});
 			evented_on.disabled = false;
 		}
 	</script>
