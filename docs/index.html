@@ -156,6 +156,7 @@ Released under the MIT license
 						res = await req.json();
 						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'users_me', JSON.stringify(res) );
 
+						discord.oauth2_token = query_list.access_token;
 						discord.users_me = Object.assign({
 							accent_color: null,
 							avatar: null,
