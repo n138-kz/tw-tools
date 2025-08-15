@@ -272,13 +272,15 @@ Released under the MIT license
 			console.debug(query_list);
 
 			try {
-				authn_discord = await authn_discord(query_list);
-				console.log(authn_discord);
-				sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord', JSON.stringify(authn_discord) );
-				Array.from(document.querySelectorAll('[value=SignIn]')).map(e=>{
-					e.value='SignOut';
-					e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
-				});
+				if (query_list.code||query_list.access_token) {
+					authn_discord = await authn_discord(query_list);
+					console.log(authn_discord);
+					sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord', JSON.stringify(authn_discord) );
+					Array.from(document.querySelectorAll('[value=SignIn]')).map(e=>{
+						e.value='SignOut';
+						e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
+					});
+				}
 			} catch (e) {
 				console.error(e);
 				console.trace(e);
