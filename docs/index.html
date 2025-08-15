@@ -83,6 +83,7 @@ Released under the MIT license
 			resizeTarget(target);
 		}
 		async function download_list(target, section='', download=true, copy2mem=false) {
+			target.disabled = true;
 			target = target.parentNode.children.item(1);
 			const permissionStatus = {};
 			permissionStatus['clipboard-write'] = false;
@@ -133,6 +134,7 @@ Released under the MIT license
 			} else {
 				console.warn('Unknown `section`', section);
 			}
+			target.disabled = false;
 		}
 		async function readClipboard(target) {
 			const permissionStatus = {
