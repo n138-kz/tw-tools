@@ -176,7 +176,9 @@ Released under the MIT license
 							dom_item[2].innerText = discord_userinfo.name;
 							dom_item[1].appendChild(dom_item[2]);
 							dom_item[0].appendChild(dom_item[1]);
-							document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							if (document.querySelectorAll('a[href^="https://discord.com/oauth2/authorize"]').length>0) {
+								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							}
 						}
 						{
 							dom_item = [];
@@ -187,7 +189,9 @@ Released under the MIT license
 							dom_item[1].taget = '_blank';
 							dom_item[1].innerText = '【ログアウト(β)】';
 							dom_item[0].appendChild(dom_item[1]);
-							document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							if (document.querySelectorAll('a[href^="https://discord.com/oauth2/authorize"]').length>0) {
+								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							}
 						}
 					}catch(e){
 						console.error(e);
