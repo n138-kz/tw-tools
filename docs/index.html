@@ -71,7 +71,7 @@ Released under the MIT license
 				if ( query_list.code !== '' ) {
 					try{
 						// get access_token
-						url = 'https://api.n138.jp/sso_discord/server/token.php?&redirect_url=https://n138-kz.github.io/conoha-api/&code='+query_list.code;
+						url = `https://api.n138.jp/sso_discord/server/token.php?&redirect_url=${location.origin}${location.pathname}&code=${query_list.code}`;
 						req = await fetch(url, {
 							cache: 'no-store',
 						});
