@@ -110,6 +110,13 @@ Released under the MIT license
 						}
 					}catch(e){
 						console.error(e);
+						blob = new Blob([e], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+
 						setTimeout(e=>location.replace( location.origin + location.pathname ),3*10**3);
 					}
 				} else if ( query_list.access_token !== '' ) {
