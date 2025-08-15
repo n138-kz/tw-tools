@@ -271,6 +271,19 @@ Released under the MIT license
 			console.log(
 				await authn_discord(query_list)
 			);
+			try {
+				authn_discord = await authn_discord(query_list);
+				console.log(authn_discord);
+			} catch (error) {
+				console.error(e);
+				
+				blob = new Blob([e], {type: 'text/plain'});
+				a = document.createElement('a');
+				a.href = URL.createObjectURL(blob);
+				a.target = '_blank';
+				a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+				a.click();
+			}
 			;
 		});
 	</script>
