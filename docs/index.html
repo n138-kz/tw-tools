@@ -474,22 +474,29 @@ Released under the MIT license
 					data: data,
 				});
 
-				req = await fetch(url, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					cache: 'no-store',
-					body: JSON.stringify(data),
-				});
-				console.log({
-					req: await req,
-				});
-				res = await req.json();
-				console.log({
-					req: await req,
-					res: await res,
-				});
+				try {
+					req = await fetch(url, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						cache: 'no-store',
+						body: JSON.stringify(data),
+					});
+					console.log({
+						req: await req,
+					});
+					res = await req.json();
+					console.log({
+						req: await req,
+						res: await res,
+					});
+					
+				} catch (error) {
+					evented_on.disabled = false;
+					console.error(error);
+					console.trace(error);
+				}
 				
 			} else if (syncto=='download') {
 				data.contents = null;
@@ -500,22 +507,29 @@ Released under the MIT license
 					data: data,
 				});
 
-				req = await fetch(url, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					cache: 'no-store',
-					body: JSON.stringify(data),
-				});
-				console.log({
-					req: await req,
-				});
-				res = await req.json();
-				console.log({
-					req: await req,
-					res: await res,
-				});
+				try {
+					req = await fetch(url, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						cache: 'no-store',
+						body: JSON.stringify(data),
+					});
+					console.log({
+						req: await req,
+					});
+					res = await req.json();
+					console.log({
+						req: await req,
+						res: await res,
+					});
+					
+				} catch (error) {
+					evented_on.disabled = false;
+					console.error(error);
+					console.trace(error);
+				}
 
 			}
 
