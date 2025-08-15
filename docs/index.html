@@ -48,6 +48,12 @@ Released under the MIT license
 			width: -webkit-fill-available; /* Safari */
 		}
 	</style>
+	<style>
+		div.thumnails {
+			max-width: 100px;
+			max-height: 100px;
+		}
+	</style>
 	<script>
 		function forceNameReplace(array) {
 			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
