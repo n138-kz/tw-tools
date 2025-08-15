@@ -55,6 +55,156 @@ Released under the MIT license
 		}
 	</style>
 	<script>
+		window.addEventListener('DOMContentLoaded', async ()=>{
+			let query_list = get_GETarray((decodeURI(location.search)+'&').replace(/^\?/,''));
+			query_list.code = ( query_list.code === "" || query_list.code === null || query_list.code === undefined )?'':query_list.code;
+			query_list.access_token = ( query_list.access_token === "" || query_list.access_token === null || query_list.access_token === undefined )?'':query_list.access_token;
+			query_list.error = ( query_list.error === "" || query_list.error === null || query_list.error === undefined )?'':query_list.error;
+			query_list.error_description = ( query_list.error_description === "" || query_list.error_description === null || query_list.error_description === undefined )?'':decodeURIComponent(query_list.error_description.replace(/\+/g,'%20'));
+			console.debug(query_list);
+
+			if ( query_list.error !== '' || query_list.error_description !== '' ) {
+			} else {
+				let discord = {};
+				discord.oauth2_token = null;
+				discord.users_me = null;
+				if ( query_list.code !== '' ) {
+					try{
+						// get access_token
+						url = 'https://api.n138.jp/sso_discord/server/token.php?&redirect_url=https://n138-kz.github.io/conoha-api/&code='+query_list.code;
+						req = await fetch(url, {
+							cache: 'no-store',
+						});
+						if(req.status>299||req.status<200){
+							throw `${req.statusText}(${req.status})`;
+						}
+						res = await req.json();
+						res.oauth2_token.expires_at = new Date((Date.now()/10**3+res.oauth2_token.expires_in)*10**3);
+						console.debug({url:url,req:req,res:res});
+						discord.oauth2_token = res.oauth2_token;
+						discord.users_me = res.users_me;
+						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'oauth2_token', JSON.stringify(res.oauth2_token) );
+						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'users_me', JSON.stringify(res.users_me) );
+						location.replace( location.origin + location.pathname + '?' + 'access_token=' + discord.oauth2_token.access_token );
+
+						// set login status
+						discord_userinfo = {};
+						discord_userinfo.name = ( discord.users_me.global_name === '' || discord.users_me.global_name === null || discord.users_me.global_name === undefined ) ? discord.users_me.username : discord.users_me.global_name;
+						discord_userinfo.avatar = 'https://cdn.discordapp.com/avatars/'+discord.users_me.id+'/'+discord.users_me.avatar;
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = 'https://discord.com/channels/@me';
+							dom_item[1].taget = '_blank';
+							dom_item[2] = document.createElement('img');
+							dom_item[2].src = discord_userinfo.avatar;
+							dom_item[2].alt = 'discord avatar';
+							dom_item[2].style.maxHeight = '1em';
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[2] = document.createElement('span');
+							dom_item[2].innerText = discord_userinfo.name;
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[0].appendChild(dom_item[1]);
+							document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+						}
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = '#';
+							dom_item[1].setAttribute('onclick', `javascript:window.open("https://api.n138.jp/sso_discord/server/token_revoke.php?token=${query_list.access_token}","oshiire-bot-v3_subwin", "left=0,top=0,width=500,height=150");sessionStorage.clear();location.replace(location.origin+location.pathname)`);
+							dom_item[1].taget = '_blank';
+							dom_item[1].innerText = '【ログアウト(β)】';
+							dom_item[0].appendChild(dom_item[1]);
+							document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+						}
+					}catch(e){
+						console.error(e);
+						location.replace( location.origin + location.pathname );
+					}
+				} else if ( query_list.access_token !== '' ) {
+					try {
+						// get access_token
+						url = 'https://discordapp.com/api/users/@me';
+						req = await fetch(url, {
+							headers: {
+								Authorization: 'Bearer '+query_list.access_token,
+							},
+							cache: 'no-store',
+						});
+						if(req.status>299||req.status<200){
+							throw `${req.statusText}(${req.status})`;
+						}
+						res = await req.json();
+						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'users_me', JSON.stringify(res) );
+
+						discord.users_me = Object.assign({
+							accent_color: null,
+							avatar: null,
+							avatar_decoration_data: null,
+							banner: null,
+							banner_color: null,
+							clan: null,
+							collectibles: null,
+							discriminator: null,
+							email: null,
+							flags: null,
+							global_name: null,
+							id: null,
+							locale: null,
+							mfa_enabled: null,
+							premium_type: null,
+							primary_guild: null,
+							public_flags: null,
+							username: null,
+							verified: null,
+						}, res);
+
+						// set login status
+						discord_userinfo = {};
+						discord_userinfo.name = ( discord.users_me.global_name === '' || discord.users_me.global_name === null || discord.users_me.global_name === undefined ) ? discord.users_me.username : discord.users_me.global_name;
+						discord_userinfo.avatar = 'https://cdn.discordapp.com/avatars/'+discord.users_me.id+'/'+discord.users_me.avatar;
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = 'https://discord.com/channels/@me';
+							dom_item[1].taget = '_blank';
+							dom_item[2] = document.createElement('img');
+							dom_item[2].src = discord_userinfo.avatar;
+							dom_item[2].alt = 'discord avatar';
+							dom_item[2].style.maxHeight = '1em';
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[2] = document.createElement('span');
+							dom_item[2].innerText = discord_userinfo.name;
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[0].appendChild(dom_item[1]);
+							document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+						}
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = '#';
+							dom_item[1].setAttribute('onclick', `javascript:window.open("https://api.n138.jp/sso_discord/server/token_revoke.php?token=${query_list.access_token}","oshiire-bot-v3_subwin", "left=0,top=0,width=500,height=150");sessionStorage.clear();location.replace(location.origin+location.pathname)`);
+							dom_item[1].taget = '_blank';
+							dom_item[1].innerText = '【ログアウト(β)】';
+							dom_item[0].appendChild(dom_item[1]);
+							document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+						}
+					}catch(e){
+						console.error(e);
+						setTimeout(()=>{
+							sessionStorage.clear();
+							location.replace(location.origin+location.pathname);
+						}, 1000*5);
+					}
+				}
+			}
+		});
+	</script>
+	<script>
 		function forceNameReplace(array) {
 			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
 		}
