@@ -64,11 +64,6 @@ class discord {
     }
 }
 
-echo json_encode([
-    'iat' => time(),
-    'access_token' => $_POST['access_token'],
-    'section' => $_POST['section'],
-    'contents' => $_POST['contents'],
 $requests = [];
 $requests = array_merge([
     'issue_at_time' => null,
@@ -84,3 +79,5 @@ $requests['remote_address'] = $_SERVER['REMOTE_ADDR'];
 $discord_api = new discord([
     'access_token'=> $requests['access_token'],
 ]);
+
+echo json_encode($requests);
