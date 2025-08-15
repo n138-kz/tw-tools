@@ -473,6 +473,16 @@ Released under the MIT license
 					url: url,
 					data: data,
 				});
+
+				req = await fetch(url, {
+					method: 'POST',
+					headers: [
+						'Content-Type: application/json',
+					],
+					body: JSON.stringify(data),
+				});
+				console.log(await req);
+				
 			} else if (syncto=='download') {
 				data.contents = null;
 
@@ -481,6 +491,16 @@ Released under the MIT license
 					url: url,
 					data: data,
 				});
+
+				req = await fetch(url, {
+					method: 'GET',
+					headers: [
+						'Content-Type: application/json',
+					],
+					body: JSON.stringify(data),
+				});
+				console.log(await req);
+
 			}
 
 			evented_on.disabled = false;
