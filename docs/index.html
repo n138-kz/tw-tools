@@ -448,7 +448,22 @@ Released under the MIT license
 				);
 			}
 		}
-		function syncServer(target, section='', syncto='download') {
+		function syncServer(target, section='pbs.twimg.com', syncto='download') {
+			target.disabled = true;
+			target = target.parentNode.children.item(1);
+
+			url = 'https://api.n138.jp/tw-tools/server/';
+
+			authn_discord = sessionStorage.getItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord' );
+			authn_discord = JSON.parse(authn_discord);
+
+			data = {
+				access_token: btoa(authn_discord.object.discord.oauth2_token),
+				contents: target.value.trim(),
+			}
+			data.contents = data.contents.length>0 ? data.contents.trim().split('\n') : [];
+
+			console.log(target, url, data);
 		}
 	</script>
 </head>
