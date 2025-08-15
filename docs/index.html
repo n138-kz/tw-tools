@@ -451,6 +451,7 @@ Released under the MIT license
 		}
 		function syncServer(target, section='pbs.twimg.com', syncto='download') {
 			target.disabled = true;
+			evented_on = target;
 			target = target.parentNode.children.item(1);
 
 			url = 'https://api.n138.jp/tw-tools/server/';
@@ -466,6 +467,7 @@ Released under the MIT license
 			data.contents = data.contents.length>0 ? data.contents.trim().split('\n') : [];
 
 			console.log(target, url, data);
+			evented_on.disabled = false;
 		}
 	</script>
 </head>
