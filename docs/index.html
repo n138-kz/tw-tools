@@ -335,7 +335,7 @@ Released under the MIT license
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
-				<input type="button" value="SignIn" onclick="authnSSO()" disabled>
+				<input type="button" value="SignIn" onclick="authnSSO()">
 				<input type="button" value="Sync ↑" onclick="syncServer(this, 'pbs.twimg.com', 'upload')" disabled>
 				<input type="button" value="Sync ↓" onclick="syncServer(this, 'pbs.twimg.com', 'download')" disabled>
 			</fieldset>
