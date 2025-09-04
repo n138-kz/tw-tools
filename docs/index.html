@@ -58,6 +58,9 @@ Released under the MIT license
 		function forceNameReplace_twing(array) {
 			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
 		}
+		function forceNameReplace_discordapp(array) {
+			return array.map((elem) => elem.replace(/(format=.*)/g, 'format=webp'))
+		}
 		function arrayUniq(array) {
 			return array.filter((elem, index, self) => self.indexOf(elem) === index);
 		}
@@ -75,6 +78,7 @@ Released under the MIT license
 				return null;
 			} else if(section == 'pbs.twimg.com') {
 				target.value = forceNameReplace_twing(target.value.split('\n')).join('\n');
+				target.value = forceNameReplace_discordapp(target.value.split('\n')).join('\n');
 			} else if(section == 'video.twimg.com') {
 			} else {
 				console.warn('Unknown `section`', section);
