@@ -55,6 +55,261 @@ Released under the MIT license
 		}
 	</style>
 	<script>
+		async function authn_discord(query_list={}) {
+			if ( query_list.error !== '' || query_list.error_description !== '' ) {
+			} else {
+				let discord = {};
+				discord.oauth2_token = null;
+				discord.users_me = null;
+				if ( query_list.code !== '' ) {
+					try{
+						// get access_token
+						url = `https://api.n138.jp/sso_discord/server/token.php?&redirect_url=${location.origin}${location.pathname}&code=${query_list.code}`;
+						req = await fetch(url, {
+							cache: 'no-store',
+						});
+						if(req.status>299||req.status<200){
+							throw `${req.statusText}(${req.status})`;
+						}
+						res = await req.json();
+						res.oauth2_token.expires_at = new Date((Date.now()/10**3+res.oauth2_token.expires_in)*10**3);
+						console.debug({url:url,req:req,res:res});
+						discord.oauth2_token = res.oauth2_token;
+						discord.users_me = res.users_me;
+						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'oauth2_token', JSON.stringify(res.oauth2_token) );
+						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'users_me', JSON.stringify(res.users_me) );
+						location.replace( location.origin + location.pathname + '?' + 'access_token=' + discord.oauth2_token.access_token );
+
+						// set login status
+						discord_userinfo = {};
+						discord_userinfo.name = ( discord.users_me.global_name === '' || discord.users_me.global_name === null || discord.users_me.global_name === undefined ) ? discord.users_me.username : discord.users_me.global_name;
+						discord_userinfo.avatar = 'https://cdn.discordapp.com/avatars/'+discord.users_me.id+'/'+discord.users_me.avatar;
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = 'https://discord.com/channels/@me';
+							dom_item[1].taget = '_blank';
+							dom_item[2] = document.createElement('img');
+							dom_item[2].src = discord_userinfo.avatar;
+							dom_item[2].alt = 'discord avatar';
+							dom_item[2].style.maxHeight = '1em';
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[2] = document.createElement('span');
+							dom_item[2].innerText = discord_userinfo.name;
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[0].appendChild(dom_item[1]);
+							if (document.querySelectorAll('a[href^="https://discord.com/oauth2/authorize"]').length>0) {
+								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							}
+						}
+						return {
+							dom: [
+								{
+									a: {
+										url: 'https://discord.com/channels/@me',
+										text: discord_userinfo.name,
+									},
+									img: {
+										url: discord_userinfo.avatar,
+										text: 'discord avatar',
+										style: {
+											maxHeight: '1em',
+										},
+									},
+								},
+							],
+							object: {
+								discord: discord,
+								discord_userinfo: discord_userinfo,
+							},
+							response_to_request: res,
+							iat: new Date().getTime()/10**3,
+						}
+					}catch(e){
+						console.error(e);
+
+						blob = new Blob([e], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+
+						setTimeout(()=>{
+							sessionStorage.clear();
+							location.replace(location.origin+location.pathname);
+						}, 5*10**3);
+					}
+				} else if ( query_list.access_token !== '' ) {
+					try {
+						// get access_token
+						url = 'https://discordapp.com/api/users/@me';
+						req = await fetch(url, {
+							headers: {
+								Authorization: 'Bearer '+query_list.access_token,
+							},
+							cache: 'no-store',
+						});
+						if(req.status>299||req.status<200){
+							throw `${req.statusText}(${req.status})`;
+						}
+						res = await req.json();
+						sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'users_me', JSON.stringify(res) );
+
+						discord.oauth2_token = query_list.access_token;
+						discord.users_me = Object.assign({
+							accent_color: null,
+							avatar: null,
+							avatar_decoration_data: null,
+							banner: null,
+							banner_color: null,
+							clan: null,
+							collectibles: null,
+							discriminator: null,
+							email: null,
+							flags: null,
+							global_name: null,
+							id: null,
+							locale: null,
+							mfa_enabled: null,
+							premium_type: null,
+							primary_guild: null,
+							public_flags: null,
+							username: null,
+							verified: null,
+						}, res);
+
+						// set login status
+						discord_userinfo = {};
+						discord_userinfo.name = ( discord.users_me.global_name === '' || discord.users_me.global_name === null || discord.users_me.global_name === undefined ) ? discord.users_me.username : discord.users_me.global_name;
+						discord_userinfo.avatar = 'https://cdn.discordapp.com/avatars/'+discord.users_me.id+'/'+discord.users_me.avatar;
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = 'https://discord.com/channels/@me';
+							dom_item[1].taget = '_blank';
+							dom_item[2] = document.createElement('img');
+							dom_item[2].src = discord_userinfo.avatar;
+							dom_item[2].alt = 'discord avatar';
+							dom_item[2].style.maxHeight = '1em';
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[2] = document.createElement('span');
+							dom_item[2].innerText = discord_userinfo.name;
+							dom_item[1].appendChild(dom_item[2]);
+							dom_item[0].appendChild(dom_item[1]);
+							if (document.querySelectorAll('a[href^="https://discord.com/oauth2/authorize"]').length>0) {
+								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							}
+						}
+						{
+							dom_item = [];
+							dom_item[0] = document.createElement('div');
+							dom_item[1] = document.createElement('a');
+							dom_item[1].href = '#';
+							dom_item[1].setAttribute('onclick', `javascript:window.open("https://api.n138.jp/sso_discord/server/token_revoke.php?token=${query_list.access_token}","subwin", "left=0,top=0,width=500,height=150");sessionStorage.clear();location.replace(location.origin+location.pathname)`);
+							dom_item[1].taget = '_blank';
+							dom_item[1].innerText = '【ログアウト(β)】';
+							dom_item[0].appendChild(dom_item[1]);
+							if (document.querySelectorAll('a[href^="https://discord.com/oauth2/authorize"]').length>0) {
+								document.querySelector('a[href^="https://discord.com/oauth2/authorize"]').after(dom_item[0]);
+							}
+						}
+						return {
+							dom: [
+								{
+									a: {
+										url: 'https://discord.com/channels/@me',
+										text: discord_userinfo.name,
+									},
+									img: {
+										url: discord_userinfo.avatar,
+										text: 'discord avatar',
+										style: {
+											maxHeight: '1em',
+										},
+									},
+								},
+								{
+									a: {
+										url: `https://api.n138.jp/sso_discord/server/token_revoke.php?token=${query_list.access_token}`,
+										text: '【ログアウト(β)】',
+									},
+								},
+							],
+							object: {
+								discord: discord,
+								discord_userinfo: discord_userinfo,
+							},
+							response_to_request: res,
+							iat: new Date().getTime()/10**3,
+						}
+					}catch(e){
+						console.error(e);
+
+						blob = new Blob([e], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+
+						setTimeout(()=>{
+							sessionStorage.clear();
+							location.replace(location.origin+location.pathname);
+						}, 5*10**3);
+					}
+				}
+			}
+		}
+		window.addEventListener('DOMContentLoaded', async ()=>{
+			let query_list = get_GETarray((decodeURI(location.search)+'&').replace(/^\?/,''));
+			query_list.code = ( query_list.code === "" || query_list.code === null || query_list.code === undefined )?'':query_list.code;
+			query_list.access_token = ( query_list.access_token === "" || query_list.access_token === null || query_list.access_token === undefined )?'':query_list.access_token;
+			query_list.error = ( query_list.error === "" || query_list.error === null || query_list.error === undefined )?'':query_list.error;
+			query_list.error_description = ( query_list.error_description === "" || query_list.error_description === null || query_list.error_description === undefined )?'':decodeURIComponent(query_list.error_description.replace(/\+/g,'%20'));
+			console.debug(query_list);
+
+			try {
+				if (query_list.code||query_list.access_token) {
+					authn_discord = await authn_discord(query_list);
+					console.log(authn_discord);
+					sessionStorage.setItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord', JSON.stringify(authn_discord) );
+					Array.from(document.querySelectorAll('[data-status^=signouted]')).map(e=>{
+						e.value='SignOut';
+						e.dataset.status='signined';
+						e.setAttribute('onclick', `authnSSO('${authn_discord['dom'][1]['a']['url']}')`);
+						dom = [];
+						dom[0] = document.createElement('a');
+						dom[0].href = authn_discord['dom'][0]['a']['url'];
+						dom[1] = document.createElement('img');
+						dom[1].src = authn_discord['dom'][0]['img']['url'];
+						dom[1].alt = authn_discord['dom'][0]['img']['text'];
+						dom[1].style.maxHeight = authn_discord['dom'][0]['img']['style']['maxHeight'];
+						dom[0].appendChild(dom[1]);
+						e.after(dom[0]);
+					});
+				}
+			} catch (e) {
+				console.error(e);
+				console.trace(e);
+				
+				blob = new Blob([e], {type: 'text/plain'});
+				a = document.createElement('a');
+				a.href = URL.createObjectURL(blob);
+				a.target = '_blank';
+				a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+				a.click();
+
+				setTimeout(()=>{
+					sessionStorage.clear();
+					location.replace(location.origin+location.pathname);
+				}, 5*10**3);
+			}
+		});
+	</script>
+	<script>
 		function forceNameReplace_twing(array) {
 			return array.map((elem) => elem.replace(/(name=.*)/g, 'name=orig'))
 		}
@@ -88,6 +343,7 @@ Released under the MIT license
 		}
 		async function download_list(target, section='', download=true, copy2mem=false) {
 			target.disabled = true;
+			evented_on = target;
 			target = target.parentNode.children.item(1);
 			const permissionStatus = {};
 			permissionStatus['clipboard-write'] = false;
@@ -138,7 +394,7 @@ Released under the MIT license
 			} else {
 				console.warn('Unknown `section`', section);
 			}
-			target.disabled = false;
+			evented_on.disabled = false;
 		}
 		async function readClipboard(target) {
 			const permissionStatus = {
@@ -180,6 +436,103 @@ Released under the MIT license
 			Array.from(document.querySelectorAll('div.thumnails')).map((elem) => elem.remove());
 			target.parentNode.parentNode.after(dom[0]);
 		}
+		function authnSSO(logout_url) {
+			if (logout_url) {
+				subwin = window.open(
+					logout_url,
+					'subwin',
+					'width=560,height=600'
+				);
+				console.log(subwin);
+			} else {
+				location.replace(
+					`https://discord.com/oauth2/authorize?client_id=1331215597119340585&response_type=code&redirect_uri=${location.origin}${location.pathname}&scope=identify+openid+guilds`,
+				);
+			}
+		}
+		async function syncServer(target, section='pbs.twimg.com', syncto='download') {
+			target.disabled = true;
+			evented_on = target;
+			target = target.parentNode.children.item(1);
+
+			url = 'https://api.n138.jp/tw-tools/server/';
+
+			authn_discord = sessionStorage.getItem( (btoa(location.href)).slice(0, 16) + '.'+'authn_discord' );
+			authn_discord = JSON.parse(authn_discord);
+
+			data = {
+				access_token: btoa(authn_discord.object.discord.oauth2_token),
+				section: section,
+				contents: target.value.trim(),
+			}
+			if (false) {
+			} else if (syncto=='upload') {
+				data.contents = data.contents.length>0 ? data.contents.trim().split('\n') : [];
+
+				console.log({
+					target: target,
+					url: url,
+					data: data,
+				});
+
+				try {
+					req = await fetch(url, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						cache: 'no-store',
+						body: JSON.stringify(data),
+					});
+					console.log({
+						req: await req,
+					});
+					res = await req.json();
+					console.log({
+						res: await res,
+					});
+					
+				} catch (error) {
+					evented_on.disabled = false;
+					console.error(error);
+					console.trace(error);
+				}
+				
+			} else if (syncto=='download') {
+				data.contents = null;
+
+				console.log({
+					target: target,
+					url: url,
+					data: data,
+				});
+
+				try {
+					req = await fetch(`${url}?access_token=${data.access_token}&contents=${JSON.stringify(data.contents)}&section=${data.section}`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						cache: 'no-store',
+					});
+					console.log({
+						req: await req,
+					});
+					res = await req.json();
+					console.log({
+						res: await res,
+					});
+					
+				} catch (error) {
+					evented_on.disabled = false;
+					console.error(error);
+					console.trace(error);
+				}
+
+			}
+
+			evented_on.disabled = false;
+		}
 	</script>
 </head>
 <body>
@@ -193,6 +546,9 @@ Released under the MIT license
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
+				<input type="button" value="SignIn" onclick="authnSSO()" data-status="signouted">
+				<input type="button" value="Sync ↑" onclick="syncServer(this, 'pbs.twimg.com', 'upload')">
+				<input type="button" value="Sync ↓" onclick="syncServer(this, 'pbs.twimg.com', 'download')">
 			</fieldset>
 		</div>
 	</section>
