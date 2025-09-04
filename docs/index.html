@@ -88,6 +88,7 @@ Released under the MIT license
 		}
 		async function download_list(target, section='', download=true, copy2mem=false) {
 			target.disabled = true;
+			evented_on = target;
 			target = target.parentNode.children.item(1);
 			const permissionStatus = {};
 			permissionStatus['clipboard-write'] = false;
@@ -138,7 +139,7 @@ Released under the MIT license
 			} else {
 				console.warn('Unknown `section`', section);
 			}
-			target.disabled = false;
+			evented_on.disabled = false;
 		}
 		async function readClipboard(target) {
 			const permissionStatus = {
