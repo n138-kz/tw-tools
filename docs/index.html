@@ -138,6 +138,25 @@ Released under the MIT license
 						navigator.clipboard.writeText(items);
 					}
 				}
+			} else if(section == 'media.discordapp.net') {
+				if (target.value.trim().length) {
+					items = target.value.split('\n');
+					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
+					items = items.join('\n') + '\n';
+					console.log(items);
+					
+					if (download) {
+						blob = new Blob([items], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+					}
+					if (copy2mem) {
+						navigator.clipboard.writeText(items);
+					}
+				}
 			} else {
 				console.warn('Unknown `section`', section);
 			}
