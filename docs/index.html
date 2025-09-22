@@ -80,6 +80,8 @@ Released under the MIT license
 			} else if(section == 'pbs.twimg.com') {
 				target.value = forceNameReplace_twing(target.value.split('\n')).join('\n');
 			} else if(section == 'video.twimg.com') {
+			} else if(section == 'media.discordapp.net') {
+				target.value = forceNameReplace_discordapp(target.value.split('\n')).join('\n');
 			} else {
 				console.warn('Unknown `section`', section);
 			}
@@ -194,6 +196,16 @@ Released under the MIT license
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
+			</fieldset>
+		</div>
+	</section>
+	<section>
+		<div>
+			<fieldset>
+				<legend><a href="//media.discordapp.net">pbs.twimg.com</a></legend>
+				<textarea id="" onblur="splitLine(this, 'media.discordapp.net');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://media.discordapp.net/attachments/1234567890/1234567890/image0.jpg?format=webp"></textarea>
+				<input type="button" value="Download list.txt" onclick="download_list(this, 'media.discordapp.net', true, false)">
+				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'media.discordapp.net', false, true)">
 			</fieldset>
 		</div>
 	</section>
