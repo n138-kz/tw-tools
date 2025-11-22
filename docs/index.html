@@ -73,13 +73,15 @@ Released under the MIT license
 			target.value = target.value.split('ftp://').join('\nftp://');
 			target.value = target.value.split('\n').sort().join('\n');
 			target.value = arrayUniq(target.value.split('\n')).join('\n');
+			console.debug('splitLine', target.value);
 			if(section == false) {
 			} else if(section == '') {
 				return null;
 			} else if(section == 'pbs.twimg.com') {
 				target.value = forceNameReplace_twing(target.value.split('\n')).join('\n');
-				target.value = forceNameReplace_discordapp(target.value.split('\n')).join('\n');
 			} else if(section == 'video.twimg.com') {
+			} else if(section == 'media.discordapp.net') {
+				target.value = forceNameReplace_discordapp(target.value.split('\n')).join('\n');
 			} else {
 				console.warn('Unknown `section`', section);
 			}
@@ -121,6 +123,25 @@ Released under the MIT license
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
 					items = items.map((elem) => `ffmpeg -hide_banner -i \'${elem}\' -y -- ${elem.replace(/\?.*/, '').replace(/.*\//, '').replace('.m3u8', '')}.mp4;`);
+					items = items.join('\n') + '\n';
+					console.log(items);
+					
+					if (download) {
+						blob = new Blob([items], {type: 'text/plain'});
+						a = document.createElement('a');
+						a.href = URL.createObjectURL(blob);
+						a.target = '_blank';
+						a.download = `${(btoa(location.href)).slice(0, 8)}_${Math.trunc(new Date().getTime()/10**3)}.txt`;
+						a.click();
+					}
+					if (copy2mem) {
+						navigator.clipboard.writeText(items);
+					}
+				}
+			} else if(section == 'media.discordapp.net') {
+				if (target.value.trim().length) {
+					items = target.value.split('\n');
+					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
@@ -194,6 +215,16 @@ Released under the MIT license
 				<textarea id="" onblur="splitLine(this, 'pbs.twimg.com');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'pbs.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'pbs.twimg.com', false, true)">
+			</fieldset>
+		</div>
+	</section>
+	<section>
+		<div>
+			<fieldset>
+				<legend><a href="//media.discordapp.net">media.discordapp.net</a></legend>
+				<textarea id="" onblur="splitLine(this, 'media.discordapp.net');view_thumnails(this);" onclick="this.value += await readClipboard()" placeholder="https://media.discordapp.net/attachments/1234567890/1234567890/image0.jpg?format=webp"></textarea>
+				<input type="button" value="Download list.txt" onclick="download_list(this, 'media.discordapp.net', true, false)">
+				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'media.discordapp.net', false, true)">
 			</fieldset>
 		</div>
 	</section>
