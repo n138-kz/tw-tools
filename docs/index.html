@@ -269,16 +269,18 @@ Released under the MIT license
 					const maxFloored = Math.floor(max);
 					return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // 上限を含み、下限も含む
 				}
-				const l=[];
-				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892357340');
-				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892200357');
-				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177267');
-				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177265');
-
-				const d=document.createElement('script');
-				d.src=l[getRandomIntInclusive(0,l.length-1)];
-				d.language='javascript';
-				document.currentScript.after(d);
+				{
+					const l=[];
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892357340');
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892200357');
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177267');
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177265');
+	
+					const d=document.createElement('script');
+					d.src=l[getRandomIntInclusive(0,l.length-1)];
+					d.language='javascript';
+					document.currentScript.after(d);
+				}
 			</script>
 			<noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3755829&pid=892357340" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3755829&pid=892357340" border="0"></a></noscript>
 		</div>
