@@ -262,7 +262,7 @@ Released under the MIT license
 	<script>
 		Array.from(document.querySelectorAll('code')).map(e=>{
 			e.addEventListener('click', i=>{
-				copyText(i.innerText);
+				copyText(i.target.innerText);
 			});
 		})
 	</script>
