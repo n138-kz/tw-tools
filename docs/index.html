@@ -286,6 +286,7 @@ Released under the MIT license
 					const d=document.createElement('script');
 					d.src=l[getRandomIntInclusive(0,l.length-1)];
 					d.language='javascript';
+					d.onerror='this.remove();';
 					document.currentScript.after(d);
 				}
 			</script>
