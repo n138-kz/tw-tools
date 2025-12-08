@@ -270,10 +270,10 @@ Released under the MIT license
 					return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // 上限を含み、下限も含む
 				}
 				const l=[];
-				l.push('//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892357340');
-				l.push('//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892200357');
-				l.push('//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177267');
-				l.push('//ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177265');
+				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892357340');
+				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892200357');
+				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177267');
+				l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177265');
 
 				const d=document.createElement('script');
 				d.src=l[getRandomIntInclusive(0,l.length-1)];
