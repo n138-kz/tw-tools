@@ -6,26 +6,26 @@
 
 <div align="center">
 
-  [![GitHub repo license](https://img.shields.io/github/license/n138-kz/_DEFAULTREPOS)](/LICENSE)
-  [![GitHub top language](https://img.shields.io/github/languages/top/n138-kz/_DEFAULTREPOS)](/../../)
-  [![GitHub repo size](https://img.shields.io/github/repo-size/n138-kz/_DEFAULTREPOS)](/../../)
-  [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/n138-kz/_DEFAULTREPOS)](/../../)
+  [![GitHub repo license](https://img.shields.io/github/license/n138-kz/tw-tools)](/LICENSE)
+  [![GitHub top language](https://img.shields.io/github/languages/top/n138-kz/tw-tools)](/../../)
+  [![GitHub repo size](https://img.shields.io/github/repo-size/n138-kz/tw-tools)](/../../)
+  [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/n138-kz/tw-tools)](/../../)
 
 </div>
 <div align="center">
 
-  [![GitHub last commit](https://img.shields.io/github/last-commit/n138-kz/_DEFAULTREPOS)](/../../commits)
-  [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/n138-kz/_DEFAULTREPOS)](/../../commits)
-  [![GitHub commit activity](https://img.shields.io/github/commit-activity/t/n138-kz/_DEFAULTREPOS)](/../../commits)
-  [![GitHub language count](https://img.shields.io/github/languages/count/n138-kz/_DEFAULTREPOS)](/../../)
+  [![GitHub last commit](https://img.shields.io/github/last-commit/n138-kz/tw-tools)](/../../commits)
+  [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/n138-kz/tw-tools)](/../../commits)
+  [![GitHub commit activity](https://img.shields.io/github/commit-activity/t/n138-kz/tw-tools)](/../../commits)
+  [![GitHub language count](https://img.shields.io/github/languages/count/n138-kz/tw-tools)](/../../)
 
 </div>
 <div align="center">
 
-  [![GitHub issues](https://img.shields.io/github/issues/n138-kz/_DEFAULTREPOS)](/../../issues)
-  [![GitHub issues closed](https://img.shields.io/github/issues-closed/n138-kz/_DEFAULTREPOS)](/../../issues)
-  [![GitHub pull requests](https://img.shields.io/github/issues-pr/n138-kz/_DEFAULTREPOS)](/../../pulls)
-  [![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/n138-kz/_DEFAULTREPOS)](/../../pulls)
+  [![GitHub issues](https://img.shields.io/github/issues/n138-kz/tw-tools)](/../../issues)
+  [![GitHub issues closed](https://img.shields.io/github/issues-closed/n138-kz/tw-tools)](/../../issues)
+  [![GitHub pull requests](https://img.shields.io/github/issues-pr/n138-kz/tw-tools)](/../../pulls)
+  [![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/n138-kz/tw-tools)](/../../pulls)
 
 </div>
 
