@@ -41,6 +41,7 @@
 ## Refs
 
 - [![](https://www.google.com/s2/favicons?size=64&domain=https://github.com)tw-tools](https://github.com/n138-kz/tw-tools)
+- [![](https://www.google.com/s2/favicons?size=64&domain=https://github.com)curl_pixiv](https://github.com/n138-kz/curl_pixiv)
 
 ## License
 
