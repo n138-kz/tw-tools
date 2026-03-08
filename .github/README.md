@@ -1,7 +1,5 @@
 # [tw-tools](https://github.com/n138-kz/tw-tools)
 
-[![GitHub Extra Pins](https://github-readme-stats.vercel.app/api/pin/?locale=ja&show_owner=true&theme=graywhite&username=n138-kz&repo=tw-tools)](https://github.com/n138-kz/tw-tools)
-
 ## Repos Info
 
 <div align="center">
