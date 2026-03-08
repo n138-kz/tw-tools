@@ -92,10 +92,17 @@ Released under the MIT license
 			target.disabled = true;
 			evented_on = target;
 			target = target.parentNode.children.item(1);
+			console.debug(target, evented_on);
+
 			const permissionStatus = {};
 			permissionStatus['clipboard-write'] = false;
 			permissionStatus['clipboard-write'] = await navigator.permissions.query({name: 'clipboard-write'});
-			console.debug(`[${permissionStatus.state}]`, await permissionStatus);
+			console.debug(`[clipboard-write:permissionStatus:${permissionStatus['clipboard-write'].state}]`, await permissionStatus);
+
+			if (target.tagName.toLowerCase()!='textarea') {
+				evented_on.disabled = false;
+				return null;
+			}
 
 			if(section == false) {
 			} else if(section == '') {
@@ -232,10 +239,24 @@ Released under the MIT license
 		<div>
 			<fieldset>
 				<legend><a href="//video.twimg.com">video.twimg.com</a></legend>
-				<p><code>jq -r .log.entries.[].request.url file.json</code></p>
 				<textarea id="" onblur="splitLine(this, 'video.twimg.com')" onclick="this.value += await readClipboard()" placeholder="https://video.twimg.com/amplify_video/1922007052844421120/pl/vbJwxUcQ1DALe4pQ.m3u8?variant_version=1&tag=21&v=cfc"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'video.twimg.com', true, false)">
 				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'video.twimg.com', false, true)">
+				<p>
+					<a href="#"target="_self" onclick="console.log(this,this.nextElementSibling);this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';">details&gt;</a>
+					<div style="display: none;">
+					</div>
+					<div>
+						<ol>
+							<li>Open Chrome DevTools</li>
+							<li>Input the <code>m3u8?var</code> into Search text box in Network tab<br>
+								<img src="img0.webp" alt="" style="width: 300px; clip-path: rect(36px 150px 46px 0px);"></li>
+							<li>Click <ruby>Download icon<rp>(</rp><rt>Export HAR(satitized)...</rt><rp>)</rp></ruby><br>
+								<img src="img0.webp" alt="" style="width: 300px; clip-path: rect(24px 228px 34px 213px);"></li>
+							<li><code>jq -r .log.entries.[].request.url <span contenteditable="true">file.json</span></code></li>
+						</ol>
+					</div>
+				</p>
 			</fieldset>
 		</div>
 	</section>
@@ -244,6 +265,40 @@ Released under the MIT license
 			<!-- OGP -->
 			<a href="https://github.com/n138-kz/tw-tools"><img style="width: stretch;max-width: 300px;" src="https://images-ext-1.discordapp.net/external/9qp481SxbpEOn7WY1QyBhKh8TN7r1f7SLX8peC5REx8/https/opengraph.githubassets.com/7558057423360a34bf952f4601b836edd3be27bc44d379b60b4cc125a48ee563/n138-kz/tw-tools?format=webp" alt=""></a>
 		</div>
+		<div>
+			<!-- AD -->
+			<script>
+				function getRandomIntInclusive(min=0, max=1) {
+					/*
+						https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%E5%8C%85%E6%8B%AC%E7%9A%84%E3%81%AB_2_%E3%81%A4%E3%81%AE%E5%80%A4%E3%81%AE%E9%96%93%E3%81%AE%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E3%81%AA%E6%95%B4%E6%95%B0%E3%82%92%E5%BE%97%E3%82%8B
+					*/
+					const minCeiled = Math.ceil(min);
+					const maxFloored = Math.floor(max);
+					return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // 上限を含み、下限も含む
+				}
+				{
+					const l=[];
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892357340');
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892200357');
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177267');
+					l.push('https://ad.jp.ap.valuecommerce.com/servlet/jsbanner?sid=3755829&pid=892177265');
+	
+					const d=document.createElement('script');
+					d.src=l[getRandomIntInclusive(0,l.length-1)];
+					d.language='javascript';
+					d.onerror='this.remove();';
+					document.currentScript.after(d);
+				}
+			</script>
+			<noscript><a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3755829&pid=892357340" rel="nofollow"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3755829&pid=892357340" border="0"></a></noscript>
+		</div>
 	</section>
+	<script>
+		Array.from(document.querySelectorAll('code')).map(e=>{
+			e.addEventListener('click', i=>{
+				copyText(i.target.innerText);
+			});
+		})
+	</script>
 </body>
 </html>
