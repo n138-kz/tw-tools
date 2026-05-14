@@ -78,11 +78,15 @@ Released under the MIT license
 			} else if(section == '') {
 				return null;
 			} else if(section == 'pbs.twimg.com') {
+				/* * function splitLine */
 				target.value = forceNameReplace_twing(target.value.split('\n')).join('\n');
 			} else if(section == 'video.twimg.com') {
+				/* * function splitLine */
 			} else if(section == 'media.discordapp.net') {
+				/* * function splitLine */
 				target.value = forceNameReplace_discordapp(target.value.split('\n')).join('\n');
 			} else {
+				/* * function splitLine */
 				console.warn('Unknown `section`', section);
 			}
 			target.value = target.value.trim();
@@ -108,6 +112,7 @@ Released under the MIT license
 			} else if(section == '') {
 				return null;
 			} else if(section == 'pbs.twimg.com') {
+				/* * function download_list */
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
 					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
@@ -127,6 +132,7 @@ Released under the MIT license
 					}
 				}
 			} else if(section == 'video.twimg.com') {
+				/* * function download_list */
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
 					items = items.map((elem) => `ffmpeg -hide_banner -i \'${elem}\' -y -- ${elem.replace(/\?.*/, '').replace(/.*\//, '').replace('.m3u8', '')}.mp4;`);
@@ -146,6 +152,7 @@ Released under the MIT license
 					}
 				}
 			} else if(section == 'media.discordapp.net') {
+				/* * function download_list */
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
 					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
@@ -165,6 +172,7 @@ Released under the MIT license
 					}
 				}
 			} else {
+				/* * function download_list */
 				console.warn('Unknown `section`', section);
 			}
 			evented_on.disabled = false;
