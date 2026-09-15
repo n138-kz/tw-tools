@@ -4,29 +4,19 @@ function arrayUniq(array) {
 function resizeTarget(target) {
     target.style.height=`${target.value.trim().split('\n').length+5}em`;
 }
-function splitLine(target, section='') {
+function splitLine(target) {
     target.value = target.value.split('https://').join('\nhttps://');
     target.value = target.value.split('http://').join('\nhttp://');
     target.value = target.value.split('ftp://').join('\nftp://');
+    target.value = target.value.split(location.protocol).join('\n'+location.protocol);
+
+    /* * sort * */
     target.value = target.value.split('\n').sort().join('\n');
+
+    /* * unique list * */
     target.value = arrayUniq(target.value.split('\n')).join('\n');
-    console.debug('splitLine', target.value);
-    if(section == false) {
-    } else if(section == '') {
-        return null;
-    } else if(section == 'pbs.twimg.com') {
-        /* * function splitLine */
-        target.value = forceNameReplace_twing(target.value.split('\n')).join('\n');
-    } else if(section == 'video.twimg.com') {
-        /* * function splitLine */
-    } else if(section == 'media.discordapp.net') {
-        /* * function splitLine */
-        target.value = forceNameReplace_discordapp(target.value.split('\n')).join('\n');
-    } else {
-        /* * function splitLine */
-        console.warn('Unknown `section`', section);
-    }
-    target.value = target.value.trim();
+
+    console.debug('splitLine', '\n', target.value);
     resizeTarget(target);
 }
 async function readClipboard(target) {
