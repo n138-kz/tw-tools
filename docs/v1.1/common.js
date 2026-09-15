@@ -4,12 +4,28 @@ function arrayUniq(array) {
 function resizeTarget(target) {
     target.style.height=`${target.value.trim().split('\n').length+5}em`;
 }
+function removeWhitespace(text='') {
+    const replaced=[];
+    text = text.split('\n');
+    for (let i = 0; i < text.length; i++) {
+        console.log(text[i]);
+        if(text[i].trim().length>0){
+            replaced.push(text[i].trim());
+        }
+    }
+
+    text = replaced.join('\n');
+    return text;
+}
 function splitLine(target) {
     target.value = target.value.split('https://').join('\nhttps://');
     target.value = target.value.split('http://').join('\nhttp://');
     target.value = target.value.split('ftp://').join('\nftp://');
     target.value = target.value.split(location.protocol).join('\n'+location.protocol);
 
+    /* * Trim space, tab * */
+    target.value = removeWhitespace(target.value);
+    
     /* * sort * */
     target.value = target.value.split('\n').sort().join('\n');
 
