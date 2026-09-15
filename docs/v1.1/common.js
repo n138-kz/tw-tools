@@ -29,6 +29,26 @@ function splitLine(target, section='') {
     target.value = target.value.trim();
     resizeTarget(target);
 }
+async function readClipboard(target) {
+    const permissionStatus = {
+        clipboard: {
+            read: await navigator.permissions.query({name: 'clipboard-read'}),
+            write: await navigator.permissions.query({name: 'clipboard-write'}),
+        },
+    };
+    console.debug(permissionStatus);
+
+    let text;
+    try {
+        text = await navigator.clipboard.readText();
+    } catch (error) {
+        text = '';
+        console.error(error);
+        console.trace(error);
+    }
+    console.log(text);
+    return text;
+}
 async function download_list(target, section='', download=true, copy2mem=false) {
     target.disabled = true;
     evented_on = target;
@@ -113,26 +133,6 @@ async function download_list(target, section='', download=true, copy2mem=false) 
         console.warn('Unknown `section`', section);
     }
     evented_on.disabled = false;
-}
-async function readClipboard(target) {
-    const permissionStatus = {
-        clipboard: {
-            read: await navigator.permissions.query({name: 'clipboard-read'}),
-            write: await navigator.permissions.query({name: 'clipboard-write'}),
-        },
-    };
-    console.debug(permissionStatus);
-
-    let text;
-    try {
-        text = await navigator.clipboard.readText();
-    } catch (error) {
-        text = '';
-        console.error(error);
-        console.trace(error);
-    }
-    console.log(text);
-    return text;
 }
 function view_thumnails(target) {
     data = target.value;
