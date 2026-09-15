@@ -31,10 +31,52 @@ Released under the MIT license
 		function forceNameReplace_discordapp(array) {
 			return array.map((elem) => elem.replace(/(format=.*)/g, 'format=webp'))
 		}
+		function __init__() {
+			const dom=[];
+			{
+				dom.push(document.createElement('section'));
+				{
+					dom.push(document.createElement('div'));
+					{
+						dom.push(document.createElement('form'));
+						dom[dom.length-1].method='post';
+						dom[dom.length-1].action='';
+						{
+							dom.push(document.createElement('textarea'));
+							dom[dom.length-1].setAttribute('onclick',
+								'(async () => { this.value += await readClipboard(); })()'
+							);
+							dom[dom.length-1].setAttribute('onblur',
+								'splitLine(this);'
+							);
+							dom[dom.length-1].placeholder='';
+							dom[dom.length-1].placeholder+='https://pbs.twimg.com/media/GvmLVpGWgAAeWzo?format=jpg&name=orig';
+							dom[dom.length-1].placeholder+='\n';
+							dom[dom.length-1].placeholder+='https://media.discordapp.net/attachments/1234567890/1234567890/image0.jpg?format=webp';
+							dom[dom.length-1].placeholder+='\n';
+							dom[dom.length-1].placeholder+='https://video.twimg.com/amplify_video/1922007052844421120/pl/vbJwxUcQ1DALe4pQ.m3u8?variant_version=1&tag=21&v=cfc';
+							dom[dom.length-1].placeholder+='\n';
+							
+							dom[dom.length-2].appendChild(dom[dom.length-1]);
+							dom.pop();
+						}
+						dom[dom.length-2].appendChild(dom[dom.length-1]);
+						dom.pop();
+					}
+					dom[dom.length-2].appendChild(dom[dom.length-1]);
+					dom.pop();
+				}
+				console.log(dom);
+				console.log(dom[0]);
+				console.log(dom.length)
+				document.body.appendChild(dom[0]);
+				dom.pop();
+			}
+		}
+		window.addEventListener('DOMContentLoaded', async ()=>{
+			__init__();
+		});
 	</script>
 </head>
-<body>
-	<section>
-	</section>
-</body>
+<body></body>
 </html>
