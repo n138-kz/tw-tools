@@ -19,7 +19,7 @@ function splitLine(target) {
     console.debug('splitLine', '\n', target.value);
     resizeTarget(target);
 }
-async function readClipboard(target) {
+async function readClipboard() {
     const permissionStatus = {
         clipboard: {
             read: await navigator.permissions.query({name: 'clipboard-read'}),
