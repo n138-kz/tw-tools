@@ -115,7 +115,13 @@ Released under the MIT license
 				/* * function download_list */
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
-					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
+					items = items.map((elem) => {
+						item_name = elem.replace(/\?.*/, '').replace(/.*\//, '');
+						item_name = item_name == 'image.png' ? `${item_name.replace('.png')}.${Date.now()}.png` : item_name;
+						item_name = item_name == 'image.jpg' ? `${item_name.replace('.jpg')}.${Date.now()}.jpg` : item_name;
+						item_name = item_name == 'image.webp' ? `${item_name.replace('.webp')}.${Date.now()}.webp` : item_name;
+						return `wget -O \'${item_name}\' \'${elem}\'&`;
+					});
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
@@ -155,7 +161,13 @@ Released under the MIT license
 				/* * function download_list */
 				if (target.value.trim().length) {
 					items = target.value.split('\n');
-					items = items.map((elem) => `wget -O \'${elem.replace(/\?.*/, '').replace(/.*\//, '')}\' \'${elem}\'&`);
+					items = items.map((elem) => {
+						item_name = elem.replace(/\?.*/, '').replace(/.*\//, '');
+						item_name = item_name == 'image.png' ? `${item_name.replace('.png')}.${Date.now()}.png` : item_name;
+						item_name = item_name == 'image.jpg' ? `${item_name.replace('.jpg')}.${Date.now()}.jpg` : item_name;
+						item_name = item_name == 'image.webp' ? `${item_name.replace('.webp')}.${Date.now()}.webp` : item_name;
+						return `wget -O \'${item_name}\' \'${elem}\'&`;
+					});
 					items = items.join('\n') + '\n';
 					console.log(items);
 					
