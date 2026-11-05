@@ -267,7 +267,8 @@ Released under the MIT license
 				<legend><a href="//media.discordapp.net">media.discordapp.net</a></legend>
 				<textarea id="" onblur="splitLine(this, 'media.discordapp.net');view_thumnails(this);" onclick="(async () => { this.value += await readClipboard(); })()" placeholder="https://media.discordapp.net/attachments/1234567890/1234567890/image0.jpg?format=webp"></textarea>
 				<input type="button" value="Download list.txt" onclick="download_list(this, 'media.discordapp.net', true, false)">
-				<input type="button" value="Copy to Clipboard" onclick="download_list(this, 'media.discordapp.net', false, true)">
+				<input type="button" value="Copy sh cmd to Clipboard" onclick="download_list(this, 'media.discordapp.net', false, true)">
+				<input type="button" value="Copy List to Clipboard" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('textarea').value);">
 			</fieldset>
 		</div>
 	</section>
