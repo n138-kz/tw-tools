@@ -164,6 +164,7 @@ Released under the MIT license
 					items = target.value.split('\n');
 					items = items.map((elem) => {
 						item_name = elem.replace(/\?.*/, '').replace(/.*\//, '');
+						console.log(item_name);
 						item_name = item_name == 'image.png' ? `${item_name.replace('.png')}.${Date.now()}.png` : item_name;
 						item_name = item_name == 'image.jpg' ? `${item_name.replace('.jpg')}.${Date.now()}.jpg` : item_name;
 						item_name = item_name == 'image.webp' ? `${item_name.replace('.webp')}.${Date.now()}.webp` : item_name;
