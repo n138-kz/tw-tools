@@ -232,7 +232,7 @@ Released under the MIT license
 			console.log(`removetxt: ${removetxt}`, );
 			const textareas = Array.from(document.querySelectorAll('textarea'));
 
-			const escapedText = remotetxt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+			const escapedText = removetxt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 			const regex = new RegExp(`^${escapedText}$`, 'gm');
 
 			textareas.forEach((e1) => {
